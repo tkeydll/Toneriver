@@ -1,0 +1,53 @@
+<h1>買い物かごの中身</h1>
+<% if session[:cart].isEmpty %>
+買い物かごは空です
+<% else %>
+
+<% # ↓ここにテキストの解説(p63)に従ってコード(form_tagメソッド)を追加します %>
+
+
+<table border>
+  <tr>
+    <th>商品番号</th>
+    <th>商品名</th>
+    <th>単価</th>
+    <th>数量</th>
+    <th>金額</th>
+    <th></th>
+  </tr>
+
+<% # ↓ここにテキストの解説(p63)に従ってコード(買い物かごの内容表示)を追加します %>
+
+
+
+
+
+
+
+
+
+
+
+<% sum = session[:cart].total_price %>
+  <tr>
+    <th class="sum" colspan="4">小計</th>
+    <td class="number_field"><%=y sum %></td>
+  </tr>
+  <tr>
+    <th class="sum" colspan="4">消費税(8%)</th>
+    <td class="number_field"><%=y shohizei_gaku(sum) %></td>
+  </tr>
+  <tr>
+    <th class="sum" colspan="4">合計</th>
+    <td class="number_field"><%=y shohizei_komi_gaku(sum) %></td>
+  </tr>
+</table>
+<br>
+
+<% # ↓ここにテキストの解説(p63)に従ってコード(送信ボタンとend)を追加します %>
+
+
+
+<%= link_to '購入手続きへ進む',checkout_confirm_path %>
+
+<% end %>
