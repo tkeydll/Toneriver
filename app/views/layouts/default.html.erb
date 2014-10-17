@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Toneriver.co.jp</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+      <h1 class="title">
+        <%= link_to 'Toneriver.co.jp',top_index_path %>
+      </h1>
+    </div><!-- header -->
+    <div class="row">
+      <div class="span2" id="sidebar">
+        <% if session[:user] %>
+          <div id="status">
+            <div id="message">
+              <i class="icon-user"></i>
+              <span class="userName"><%= @me.name %></span>さん
+            </div><!-- message -->
+          </div><!-- status -->
+          <table id="table-sidebar">
+          <tr><td>
+            <i class="icon-th"></i>
+            <%= link_to "商品一覧", top_index_path %>
+          </td></tr>
+          <tr><td>
+            <i class="icon-shopping-cart"></i>
+            <%= link_to "買い物かごを見る", cart_index_path %>
+          </td></tr>
+          <tr><td>
+            <i class="icon-list"></i>
+            <%= link_to "注文履歴", history_path %>
+          </td></tr>
+          <tr><td>
+            <i class="icon-off"></i>
+            <%= link_to "ログアウト", login_path %>
+          </td></tr>
+          </table>
+        <% end %>
+
+      </div>
+      <div class="span10">
+        <%= yield %>
+      </div>
+    </div>
+    <div class="footer">
+    Copyright&copy; Knowledge-ex. Limited. All rights reserved.
+    </div>
+</div>
+</body>
+</html>
