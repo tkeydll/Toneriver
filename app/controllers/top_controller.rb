@@ -17,9 +17,9 @@ class TopController < ApplicationController
   # GET /top/1
   # GET /top/1.json
   def show
-    # ↓ここにテキストの解説(p33)に従ってコード(itemモデルオブジェクトをfindで取得等)を追加します
 
-
+    @item = Item.find(params[:id])
+    @comment = Comment.new
 
     respond_to do |format|
       format.html # show.html.erb

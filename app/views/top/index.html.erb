@@ -4,9 +4,9 @@
 
 <% @items.each do |item| %>
   <li>
-    <%= image_tag("/assets/#{item.image}") %>
+    <%= link_to image_tag("/assets/#{item.image}"), top_path(item) %>
     <p>
-      <%= item.name %><br />
+      <%= link_to item.name, top_path(item) %><br />
       <span class="price"><%= item.unit_price %>円（税別）</span><br />
       在庫：<%= item.quantity %>
     </p>
