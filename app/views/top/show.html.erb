@@ -19,10 +19,14 @@
   <%= @item.description %>
 </p>
 
-<% # ↓ここにテキストの解説(p37)に従ってコード(「良いね」リンク表示)を追加します %>
+<% if (@item.likes.where(["user_id = ?", session[:user]]).size == 0) %>
+  <%= link_to 'イイね！', like_path(@item) %>
+<% else %>
+  <%= link_to 'イイね！を取り消す', like_cancel_path(@item) %>
+<% end %>
 
-
-
+<i class="icon-thums-up"></i>
+<%= @item.likes.count %>人のユーザーがこの商品を「イイね！」と言っています
 
 
 

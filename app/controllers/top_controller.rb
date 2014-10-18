@@ -28,11 +28,11 @@ class TopController < ApplicationController
   end
 
   def like
-    # ↓ここにテキストの解説(p38)に従ってコード(itemモデルオブジェクトをfindで取得)を追加します
-    
 
-    # ↓ここにテキストの解説(p39)に従ってコード(良いねを増やして保存)を追加します
+    item = Item.find(params[:id])
 
+    item.likes << Like.new(user: @me)
+    item.save
 
     
     respond_to do |format|

@@ -10,6 +10,10 @@
       <span class="price"><%= item.unit_price %>円（税別）</span><br />
       在庫：<%= item.quantity %>
     </p>
+
+    <i class="icon-thumbs-up"></i>
+    <%= item.likes.count %>人
+
   </li>
 <% end %>
 
