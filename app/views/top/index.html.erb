@@ -2,26 +2,20 @@
 
 <ul class="item_list">
 
-<% # ↓ここにテキストの解説(p24)に従ってコード(eachメソッドによるループ)を追加します %>
-
-    <li>
-    <% # ↓ここにテキストの解説(p26)に従ってコード(商品画像の表示)を追加します %>
-
-
-    <% # ↓ここにテキストの解説(p27)に従ってコード(商品名、価格、在庫数量の表示)を追加します %>
+<% @items.each do |item| %>
+  <li>
+    <%= link_to image_tag("/assets/#{item.image}"), top_path(item) %>
     <p>
-
-
-
+      <%= link_to item.name, top_path(item) %><br />
+      <span class="price"><%= item.unit_price %>円（税別）</span><br />
+      在庫：<%= item.quantity %>
     </p>
 
-    <% # ↓ここにテキストの解説(p40)に従ってコード(「良いね」の人数表示)を追加します %>
+    <i class="icon-thumbs-up"></i>
+    <%= item.likes.count %>人
 
-
-    <% # ↓ここにテキストの解説(p53)に従ってコード(コメントの件数表示)を追加します %>
-
-    </li>
-<% # ↓ここにテキストの解説(p24)に従ってコード(eachメソッドの終端のend)を追加します %>
+  </li>
+<% end %>
 
 </ul>
 <br />

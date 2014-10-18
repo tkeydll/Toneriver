@@ -5,8 +5,8 @@ class TopController < ApplicationController
   # GET /top
   # GET /top.json
   def index
-    # ↓ここにテキストの解説(p20)に従ってコード(itemモデルオブジェクトをallで全件取得)を追加します
 
+    @items = Item.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -17,9 +17,9 @@ class TopController < ApplicationController
   # GET /top/1
   # GET /top/1.json
   def show
-    # ↓ここにテキストの解説(p33)に従ってコード(itemモデルオブジェクトをfindで取得等)を追加します
 
-
+    @item = Item.find(params[:id])
+    @comment = Comment.new
 
     respond_to do |format|
       format.html # show.html.erb
@@ -28,11 +28,11 @@ class TopController < ApplicationController
   end
 
   def like
-    # ↓ここにテキストの解説(p38)に従ってコード(itemモデルオブジェクトをfindで取得)を追加します
-    
 
-    # ↓ここにテキストの解説(p39)に従ってコード(良いねを増やして保存)を追加します
+    item = Item.find(params[:id])
 
+    item.likes << Like.new(user: @me)
+    item.save
 
     
     respond_to do |format|
