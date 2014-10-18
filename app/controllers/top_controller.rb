@@ -5,8 +5,8 @@ class TopController < ApplicationController
   # GET /top
   # GET /top.json
   def index
-    # ↓ここにテキストの解説(p20)に従ってコード(itemモデルオブジェクトをallで全件取得)を追加します
 
+    @items = Item.all
 
     respond_to do |format|
       format.html # index.html.erb
