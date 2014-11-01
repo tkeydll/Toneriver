@@ -4,8 +4,6 @@ class ApplicationController < ActionController::Base
   private
   
   def session_user
-    # ↓テキストの解説(p48)に従ってコードを削除します
-    session[:user] = 1 #この行を削除
     unless session[:user]
       redirect_to :controller => :login and return false
     end

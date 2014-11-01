@@ -1,14 +1,27 @@
 ﻿class LoginController < ApplicationController
 
 
-  # ↓ここにテキストの解説(p43)に従ってコード(indexメソッド定義)を追加します
-  
-  
+  def index
+    @user = User.new
+  end
 
+  def auth
+    reset_session
+    @user = User.new(params[:user])
 
+    @auth = User.find_by_login_and_password(params[:user][:login], params[:user][:password])
 
-  # ↓ここにテキストの解説(p44～48)に従ってコード(authメソッドの定義)を追加します
+    respond_to do |format|
+      unless @auth
+        flash[:notice] = "ログイン名またはパスワードが違います。"
+        format.html { render :action => "index" }
+      else
+        session[:user] = @auth.id
+        format.html { redirect_to(top_index_path) }
+      end
+    end
 
+  end
 
 
 
