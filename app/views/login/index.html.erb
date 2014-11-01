@@ -1,1 +1,16 @@
-<% # ↓ここにテキストの解説(p42)に従ってコード(ログイン画面)を追加します %>
+<p style="color: green">
+  <%= notice %>
+</p>
+<%= form_for(:user, url: login_auth_path) do |f| %>
+  <p>
+    <%= f.label :login %><br />
+    <%= f.text_field :login %>
+  </p>
+  <p>
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
+  </p>
+  <p>
+    <%= f.submit 'Login' %>
+  </p>
+<% end %>
