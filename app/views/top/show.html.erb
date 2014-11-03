@@ -27,33 +27,17 @@
 
 <i class="icon-thums-up"></i>
 <%= @item.likes.count %>人のユーザーがこの商品を「イイね！」と言っています
+<i class="icon-comment"></i>
+<%= @item.comments.size %>件のレビューコメントがあります<br />
+<hr />
 
-
-
-<% # ↓ここにテキストの解説(p40)に従ってコード(「良いね」件数表示)を追加します %>
-
-
-
-<% # ↓ここにテキストの解説(p52)に従ってコード(レビューコメント件数表示＝<hr>タグの前まで)を追加します %>
-
-
-
-
-<% # ↓ここにテキストの解説(p60)に従ってコード(form_tagによるフォーム)を追加します %>
-
-
-
-<hr>
-<% # ↓ここにテキストの解説(p52)に従ってコード(レビューコメント一覧表示＝<hr>タグから後)を追加します %>
-<% # ↓p52の実装の後、さらにテキストの解説(p56)に従ってコード(「削除」リンク)を追加します %>
-
-
-
-
-
-
-
-
+<p>レビューコメント一覧</p>
+<% @item.comments.each do |comment| %>
+  <b><%= comment.user.name %></b><br />
+  <%= comment.description %><br />
+  <%= time_ago_in_words comment.created_at %> ago
+  <hr />
+<% end %>
 
 
 
@@ -69,9 +53,11 @@
     </div>
   <% end %>
 
-<% # ↓ここにテキストの解説(p53)に従ってコード(コメント投稿用フォーム)を追加します %>
-
-
-
+  <% #レビュー投稿フォーム %>
+  <div class="field">
+    レビューコメントを投稿しましょう<br />
+    <%= f.text_area :description, :rows => 5 %><br />
+    <%= f.submit "投稿", class: "btn" %>
+  </div>
 
 <% end %>
