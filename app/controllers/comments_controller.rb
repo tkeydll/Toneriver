@@ -26,11 +26,13 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   # DELETE /comments/1.json
   def destroy
-    # ↓item),ここにテキストの解説(p58)に従ってコードを追加します
+    comment = Comment.find(params[:comment_id])
+    comment.destroy
 
-
-
-
+    respond_to do |format|
+      format.html { redirect_to top_path(params[:id]), notice: "#{params[:comment_id]} のレビューコメントを削除しました" }
+      format.json { head :no_content }
+    end
 
   end
 end

@@ -32,11 +32,18 @@
 <hr />
 
 <p>レビューコメント一覧</p>
+
 <% @item.comments.each do |comment| %>
   <b><%= comment.user.name %></b><br />
   <%= comment.description %><br />
   <%= time_ago_in_words comment.created_at %> ago
+
+  <% if comment.user.id == session[:user] %>
+    [<%= link_to '削除', top_comment_path(comment.item, comment), confirm: 'コメントを削除してよろしいですか？', method: :delete %>]
+  <% end %>
+
   <hr />
+
 <% end %>
 
 
