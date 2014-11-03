@@ -2,9 +2,7 @@
 <% if session[:cart].isEmpty %>
 買い物かごは空です
 <% else %>
-
-<% # ↓ここにテキストの解説(p63)に従ってコード(form_tagメソッド)を追加します %>
-
+<% form_tag cart_update_path do %>
 
 <table border>
   <tr>
@@ -16,16 +14,23 @@
     <th></th>
   </tr>
 
-<% # ↓ここにテキストの解説(p63)に従ってコード(買い物かごの内容表示)を追加します %>
-
-
-
-
-
-
-
-
-
+<% session[:cart].each do |cart| %>
+<% item = Item.find(cart[:id]) %>
+  <tr>
+    <td class="number_field"><%= item.no %></td>
+    <td><%= link_to item.name, top_path(item) %></td>
+    <td class="number_field"><%=y item.unit_price %></td>
+    <td class="number_field">
+      <%= text_field_tag "quantity[#{item.id}] ", cart[:quantity], class: :number_field %>
+    </td>
+    <td class="number_field">
+      <%=y item.unit_price * cart[:quantity] %>
+    </td>
+    <td>
+      <%= link_to '削除', cart_path(item), {confirm: '削除してよろしいですか？', method: :delete } %>
+    </td>
+  </tr>
+<% end %>
 
 
 <% sum = session[:cart].total_price %>
@@ -44,10 +49,9 @@
 </table>
 <br>
 
-<% # ↓ここにテキストの解説(p63)に従ってコード(送信ボタンとend)を追加します %>
-
-
 
 <%= link_to '購入手続きへ進む',checkout_confirm_path %>
+
+<%= submit_tag "再計算" %>
 
 <% end %>

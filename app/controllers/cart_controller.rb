@@ -26,10 +26,11 @@ class CartController < ApplicationController
   end
 
   def add
-    # ↓ここにテキストの解説(p61)に従ってコードを追加します
+    session[:cart].add(params[:id], params[:quantity])
 
-
-
+    respont_do do |format|
+      format.html { redirect_to cart_index_path }
+    end
 
   end
 
