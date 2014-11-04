@@ -1,57 +1,60 @@
 <h1>買い物かごの中身</h1>
 <% if session[:cart].isEmpty %>
-買い物かごは空です
+  買い物かごは空です
+
 <% else %>
-<% form_tag cart_update_path do %>
 
-<table border>
-  <tr>
-    <th>商品番号</th>
-    <th>商品名</th>
-    <th>単価</th>
-    <th>数量</th>
-    <th>金額</th>
-    <th></th>
-  </tr>
+  <%= form_tag cart_update_path do %>
 
-<% session[:cart].each do |cart| %>
-<% item = Item.find(cart[:id]) %>
-  <tr>
-    <td class="number_field"><%= item.no %></td>
-    <td><%= link_to item.name, top_path(item) %></td>
-    <td class="number_field"><%=y item.unit_price %></td>
-    <td class="number_field">
-      <%= text_field_tag "quantity[#{item.id}] ", cart[:quantity], class: :number_field %>
-    </td>
-    <td class="number_field">
-      <%=y item.unit_price * cart[:quantity] %>
-    </td>
-    <td>
-      <%= link_to '削除', cart_path(item), {confirm: '削除してよろしいですか？', method: :delete } %>
-    </td>
-  </tr>
-<% end %>
+    <table border>
+      <tr>
+        <th>商品番号</th>
+        <th>商品名</th>
+        <th>単価</th>
+        <th>数量</th>
+        <th>金額</th>
+        <th></th>
+      </tr>
 
-
-<% sum = session[:cart].total_price %>
-  <tr>
-    <th class="sum" colspan="4">小計</th>
-    <td class="number_field"><%=y sum %></td>
-  </tr>
-  <tr>
-    <th class="sum" colspan="4">消費税(8%)</th>
-    <td class="number_field"><%=y shohizei_gaku(sum) %></td>
-  </tr>
-  <tr>
-    <th class="sum" colspan="4">合計</th>
-    <td class="number_field"><%=y shohizei_komi_gaku(sum) %></td>
-  </tr>
-</table>
-<br>
+    <% session[:cart].each do |cart| %>
+      <% item = Item.find(cart[:id]) %>
+      <tr>
+        <td class="number_field"><%= item.no %></td>
+        <td><%= link_to item.name, top_path(item) %></td>
+        <td class="number_field"><%=y item.unit_price %></td>
+        <td class="number_field">
+          <%= text_field_tag "quantity[#{item.id}] ", cart[:quantity], class: :number_field %>
+        </td>
+        <td class="number_field">
+          <%=y item.unit_price * cart[:quantity] %>
+        </td>
+        <td>
+          <%= link_to '削除', cart_path(item), {confirm: '削除してよろしいですか？', method: :delete } %>
+        </td>
+      </tr>
+    <% end %>
 
 
-<%= link_to '購入手続きへ進む',checkout_confirm_path %>
+    <% sum = session[:cart].total_price %>
+      <tr>
+        <th class="sum" colspan="4">小計</th>
+        <td class="number_field"><%=y sum %></td>
+      </tr>
+      <tr>
+        <th class="sum" colspan="4">消費税(8%)</th>
+        <td class="number_field"><%=y shohizei_gaku(sum) %></td>
+      </tr>
+      <tr>
+        <th class="sum" colspan="4">合計</th>
+        <td class="number_field"><%=y shohizei_komi_gaku(sum) %></td>
+      </tr>
+    </table>
+    <br>
 
-<%= submit_tag "再計算" %>
+    <%= submit_tag "再計算" %>
+
+  <% end %>
+
+  <%= link_to '購入手続きへ進む',checkout_confirm_path %>
 
 <% end %>
