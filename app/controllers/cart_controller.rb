@@ -15,7 +15,10 @@ class CartController < ApplicationController
     q = params[:quantity]
 
     q.each do |k, v|
-      session[:cart].update(k, v)
+      # v = {" " => quantity} となるので
+      # バグといって良いくらいのめちゃくちゃな実装
+      # なんでこーなるの？
+      session[:cart].update(k, v[" "])
     end
 
     respond_to do |format|
