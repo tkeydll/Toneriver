@@ -23,7 +23,7 @@
         <td><%= link_to item.name, top_path(item) %></td>
         <td class="number_field"><%=y item.unit_price %></td>
         <td class="number_field">
-          <%= text_field_tag "quantity[#{item.id}] ", cart[:quantity], class: :number_field %>
+          <%= text_field_tag "quantity[#{item.id}]", cart[:quantity], class: :number_field %>
         </td>
         <td class="number_field">
           <%=y item.unit_price * cart[:quantity] %>

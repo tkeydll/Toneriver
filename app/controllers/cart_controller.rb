@@ -15,14 +15,11 @@ class CartController < ApplicationController
     q = params[:quantity]
 
     q.each do |k, v|
-      # v = {" " => quantity} となるので
-      # バグといって良いくらいのめちゃくちゃな実装
-      # なんでこーなるの？
-      session[:cart].update(k, v[" "])
+      session[:cart].update(k, v)
     end
 
     respond_to do |format|
-      format.html { redirect_to cart_index_path }
+      format.html { redirect_to cart_index_path, notice: "#{params[:quantity]}" }
     end
   end
 
