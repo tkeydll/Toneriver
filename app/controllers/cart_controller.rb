@@ -12,24 +12,31 @@ class CartController < ApplicationController
   end
 
   def update
-    # ↓ここにテキストの解説(p64)に従ってコードを追加します
+    q = params[:quantity]
 
+    q.each do |k, v|
+      session[:cart].update(k, v)
+    end
 
-
+    respond_to do |format|
+      format.html { redirect_to cart_index_path, notice: "#{params[:quantity]}" }
+    end
   end
 
   def destroy
-    # ↓ここにテキストの解説(p65)に従ってコードを追加します
+    session[:cart].remove(params[:id])
 
-
-
+    respond_to do |format|
+      format.html { redirect_to cart_index_path }
+    end
   end
 
   def add
-    # ↓ここにテキストの解説(p61)に従ってコードを追加します
+    session[:cart].add(params[:id], params[:quantity])
 
-
-
+    respond_to do |format|
+      format.html { redirect_to cart_index_path }
+    end
 
   end
 
