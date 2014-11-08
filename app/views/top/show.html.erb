@@ -29,6 +29,12 @@
 <%= @item.likes.count %>人のユーザーがこの商品を「イイね！」と言っています
 <i class="icon-comment"></i>
 <%= @item.comments.size %>件のレビューコメントがあります<br />
+
+<%= form_tag cart_add_path(@item) do %>
+  個数:<%= text_field_tag :quantity, 1, class: :number_field %>
+  <%= submit_tag '買い物かごに入れる' %>
+<% end %>
+
 <hr />
 
 <p>レビューコメント一覧</p>
