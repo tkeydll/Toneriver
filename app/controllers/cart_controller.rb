@@ -19,7 +19,7 @@ class CartController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to cart_index_path, notice: "#{params[:quantity]}" }
+      format.html { redirect_to cart_index_path }
     end
   end
 
